@@ -13,7 +13,7 @@ $("#signupform").submit(function(event){
     event.preventDefault();
     //collect user inputs
     var datatopost = $(this).serializeArray();
-//    console.log(datatopost);
+//    console.log(datatopost)
     //send them to signup.php using AJAX
     $.ajax({
         url: "signup.php",
