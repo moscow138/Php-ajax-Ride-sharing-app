@@ -238,11 +238,11 @@ include('remember.php');
                     &times;
                   </button>
                   <h4 id="myModalLabel">
-                    Sign up today and Start using our Online Notes App! 
+                    Sign up today and Start using our Ride Sharing App! 
                   </h4>
               </div>
               <div class="modal-body">
-                  
+              
                   <!--Sign up message from PHP file-->
                   <div id="signupmessage"></div>
                   
@@ -334,7 +334,7 @@ include('remember.php');
     <!-- Footer-->
       <div class="footer">
           <div class="container">
-              <p>DevelopmentIsland.com Copyright &copy; 2015-<?php $today = date("Y"); echo $today?>.</p>
+              <p>Ochustech.com Copyright &copy; 2015-<?php $today = date("Y"); echo $today?>.</p>
           </div>
       </div>
       
