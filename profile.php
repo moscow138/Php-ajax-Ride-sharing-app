@@ -14,7 +14,7 @@ $result = mysqli_query($link, $sql);
 $count = mysqli_num_rows($result);
 
 if($count == 1){
-    $row = mysqli_fetch_array($result, MYSQL_ASSOC); 
+    $row = mysqli_fetch_array($result, MYSQLI_ASSOC); 
     $username = $row['username'];
     $email = $row['email']; 
     $picture = $row['profilepicture'];
@@ -221,7 +221,7 @@ if($count == 1){
                   
               </div>
               <div class="modal-footer">
-                  <input class="btn green" name="updateusername" type="submit" value="Submit">
+                  <input class="btn green" name="updateemail" type="submit" value="Submit">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                   Cancel
                 </button> 
@@ -265,7 +265,7 @@ if($count == 1){
                   
               </div>
               <div class="modal-footer">
-                  <input class="btn green" name="updateusername" type="submit" value="Submit">
+                  <input class="btn green" name="updatepassword" type="submit" value="Submit">
                 <button type="button" class="btn btn-default" data-dismiss="modal">
                   Cancel
                 </button> 
@@ -323,7 +323,7 @@ if($count == 1){
     <!-- Footer-->
       <div class="footer">
           <div class="container">
-              <p>DevelopmentIsland.com Copyright &copy; 2015-<?php $today = date("Y"); echo $today?>.</p>
+              <p>ochustech.com Copyright &copy; 2015-<?php $today = date("Y"); echo $today?>.</p>
           </div>
       </div>
       <!--Spinner-->
