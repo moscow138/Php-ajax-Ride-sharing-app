@@ -47,6 +47,7 @@ function calcRoute() {
     var request = {
         origin:start, 
         destination:end,
+        
         travelMode: google.maps.DirectionsTravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         durationInTraffic: false,   
