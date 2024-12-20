@@ -1,10 +1,7 @@
 //set map options
-var myLatLng = {lat: 51.5, lng: -0.1};
 var mapOptions = {
-    center: myLatLng,
     zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
-
 };
 
 //create autocomplete objects
@@ -22,6 +19,7 @@ var autocomplete2 = new google.maps.places.Autocomplete(input2, options);
 
 //create a DirectionsService object to use the route method and get a result for our request
 var directionsService = new google.maps.DirectionsService();
+var directionsDisplay; // Declare directionsDisplay variable
 
 //onload:
 google.maps.event.addDomListener(window, 'load', initialize);
@@ -31,10 +29,34 @@ function initialize() {
     //create a DirectionsRenderer object which we will use to display the route
     directionsDisplay = new google.maps.DirectionsRenderer();
     //create map
-    map=new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+    map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
     //bind the DirectionsRenderer to the map
     directionsDisplay.setMap(map);
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            map.setCenter(pos);
+        }, function() {
+            handleLocationError(true, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, map.getCenter());
+    }
 }//end of initialize
+
+function handleLocationError(browserHasGeolocation, pos) {
+    var infoWindow = new google.maps.InfoWindow({map: map});
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+}
 
 //Calculate route when selecting autocomplete:
 google.maps.event.addListener(autocomplete1, 'place_changed', calcRoute);
@@ -47,7 +69,6 @@ function calcRoute() {
     var request = {
         origin:start, 
         destination:end,
-        
         travelMode: google.maps.DirectionsTravelMode.DRIVING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         durationInTraffic: false,   
