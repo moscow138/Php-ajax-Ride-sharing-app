@@ -3,6 +3,14 @@
 session_start();
 include('connection.php'); 
 
+require("src/Exception.php");
+require("src/PHPMailer.php");
+require("src/SMTP.php");
+//define namespaces
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
 //<!--Check user inputs-->
 //    <!--Define error messages-->
 $missingUsername = '<p><strong>Please enter a username!</strong></p>';
@@ -146,9 +154,45 @@ if(!$result){
 
 //Send the user an email with a link to activate.php with their email and activation code
 $message = "Please click on this link to activate your account:\n\n";
-$message .= "http://carsharingwebsitefinal.thecompletewebhosting.com/activate.php?email=" . urlencode($email) . "&key=$activationKey";
-if(mail($email, 'Confirm your Registration', $message, 'From:'.'developmentisland@gmail.com')){
-       echo "<div class='alert alert-success'>Thank for your registring! A confirmation email has been sent to $email. Please click on the activation link to activate your account.</div>";
+$message .= "https://projects.ochustech.com/ride_share_app/activate.php?email=" . urlencode($email) . "&key=$activationKey";
+
+//create instance of php mailer..
+$mail = new PHPMailer();
+//setmailer to use smtp..
+$mail->isSMTP();
+//define smtp host..
+$mail->Host = "mail.ochustech.com";
+//enable smtp authentication..
+$mail->SMTPAuth = "true";
+//set type of encription(ssl/tls)
+$mail->SMTPSecure = "ssl";
+//set port to connect smtp..
+$mail->Port = 465;
+//set gmail username..
+$mail->Username = "viraltechcourse@ochustech.com";
+//set gmail password
+$mail->Password = "xya4v1fU-=sG";
+//set email subject..
+$mail->Subject = "Confirm Your Registration";
+//set sender email..
+$mail->setFrom("viraltechcourse@ochustech.com","Ride Share");
+//email body
+$mail->Body = $message;
+//add recipient..
+$mail->addAddress($email);
+    
+  //sending email..
+if($mail->Send()){
+    
+echo "<div class='alert alert-success alert-dismissible text-center' role='alert'>
+  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+  <strong>success!</strong> Thanks for registring! A confirmation email has been sent to $email. Please click on the activation link to activate your account.
+</div>";
+
 }
+
+//close smtp..
+$mail->smtpClose();
+    
         
         ?>
