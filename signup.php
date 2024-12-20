@@ -161,7 +161,7 @@ $mail = new PHPMailer();
 //setmailer to use smtp..
 $mail->isSMTP();
 //define smtp host..
-$mail->Host = "mail.ochustech.com";
+$mail->Host = "";
 //enable smtp authentication..
 $mail->SMTPAuth = "true";
 //set type of encription(ssl/tls)
@@ -169,13 +169,13 @@ $mail->SMTPSecure = "ssl";
 //set port to connect smtp..
 $mail->Port = 465;
 //set gmail username..
-$mail->Username = "viraltechcourse@ochustech.com";
+$mail->Username = "";
 //set gmail password
-$mail->Password = "xya4v1fU-=sG";
+$mail->Password = "";
 //set email subject..
 $mail->Subject = "Confirm Your Registration";
 //set sender email..
-$mail->setFrom("viraltechcourse@ochustech.com","Ride Share");
+$mail->setFrom("","Ride Share");
 //email body
 $mail->Body = $message;
 //add recipient..
